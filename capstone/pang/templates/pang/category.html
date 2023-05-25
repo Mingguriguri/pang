@@ -2,7 +2,9 @@
 <html>
 <body>
     {% for category in categories %}
-        <a href="pang/detail/"><h2>{{ category.name }}</h2></a>
+        <!--<a href="pang/detail/"><h2>{{ category.name }}</h2></a>-->
+        <h2><a href="{% url 'detail' category.id %}">{{ category.name }}</a></h2>
     {% endfor %}
 </body>
 </html>
+

@@ -14,12 +14,12 @@ def show_items(request):
     
     return render(request, 'pang/category.html', context)
 
-def detail(request):
-    categories = Category.objects.all()  
-    item_ = Item.objects.all()
+def detail(request, category_id):
+    categories = Category.objects.get(id=category_id)  
+    items = Item.objects.all()
     context = {
         "categories" : categories,
-        "item" : item_,
+        "items" : items,
     }
     
     return render(request, 'pang/detail.html', context)

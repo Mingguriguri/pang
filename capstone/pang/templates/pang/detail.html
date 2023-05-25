@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html>
 <body>
-    {% for category in categories %}
-        <h2>{{ category.name }}</h2>
-    {% endfor %}
-   
+    <h1>{{ categories.name }}</h1>
+    <ul>
+        {% for item in categories.items.all %}
+            <li>{{ item.contents }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a new item: </h3>
+    <form action="{% url 'add_item' categories.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="item_name" placeholder="Enter new item" required>
+        <input type="submit" value="Add Item">
+    </form>
+    
+
+    <a href="{% url 'show_items' %}" class="button">Back to Categories</a>
+
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #83d6ed;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .button:hover {background-color: #2d93d3}
+
+        .button:active {
+            background-color: #035bcf;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
 </body>
 </html>

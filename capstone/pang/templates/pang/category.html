@@ -2,7 +2,16 @@
 <html>
 <body>
     {% for category in categories %}
-        <a href="pang/detail/"><h2>{{ category.name }}</h2></a>
+        <!--<a href="pang/detail/"><h2>{{ category.name }}</h2></a>-->
+        <h2><a href="{% url 'detail' category.id %}">{{ category.name }}</a></h2>
     {% endfor %}
+
+    <h2>Add a new category: </h2>
+    <form method="POST" action="{% url 'add_category' %}">
+        {% csrf_token %}
+        <input type="text" name="category_name" placeholder="Enter new Category" required>
+        <input type="submit" value="Add">
+    </form>
 </body>
 </html>
+

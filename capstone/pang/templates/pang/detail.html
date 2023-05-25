@@ -8,6 +8,14 @@
         {% endfor %}
     </ul>
 
+    <h3>Add a new item: </h3>
+    <form action="{% url 'add_item' categories.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="item_name" placeholder="Enter new item" required>
+        <input type="submit" value="Add Item">
+    </form>
+    
+
     <a href="{% url 'show_items' %}" class="button">Back to Categories</a>
 
     <style>

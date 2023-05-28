@@ -53,11 +53,11 @@ def add_item(request, category_id):
 
     return redirect('show_items', category_id=category_id)
 
-
+@require_POST
 def delete_item(request, item_id):
     # item_id로 Item을 찾고 삭제합니다.
     Item.objects.get(id=item_id).delete()
-    return HttpResponse(status=204)
+    return redirect('show_items')  # 변경: 메인 페이지로 이동
 
 
 @require_POST

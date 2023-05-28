@@ -54,6 +54,12 @@ def add_item(request, category_id):
     return redirect('show_items', category_id=category_id)
 
 
+def delete_item(request, item_id):
+    # item_id로 Item을 찾고 삭제합니다.
+    Item.objects.get(id=item_id).delete()
+    return HttpResponse(status=204)
+
+
 @require_POST
 def delete_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)

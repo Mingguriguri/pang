@@ -8,5 +8,6 @@ urlpatterns = [
     path("add_category/", views.add_category, name="add_category"),
     path("add_item/<int:category_id>", views.add_item, name="add_item"),
     path('delete_category/<int:category_id>', views.delete_category, name='delete_category'),
+    path('delete_item/<int:item_id>/', views.delete_item, name='delete_item'),
 
 ]

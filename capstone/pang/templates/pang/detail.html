@@ -4,7 +4,7 @@
     <h1>{{ categories.name }}</h1>
     <ul>
         {% for item in categories.items.all %}
-            <li>{{ item.contents }}</li>
+            <li class="item" data-item-id="{{ item.id}}">{{ item.contents }}</li>
         {% endfor %}
     </ul>
 
@@ -41,5 +41,22 @@
             transform: translateY(4px);
         }
     </style>
+    <script>
+        document.querySelectorAll('.item').forEach(function(element) {
+            element.addEventListener('dblclick', function(event) {
+                var item_id = event.target.getAttribute('data-item-id');
+                if (confirm('Are you sure you want to delete this item?')) {
+                    fetch('/delete_item/' + item_id, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).then(function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

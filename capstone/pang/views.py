@@ -4,6 +4,9 @@ from .models import Category, Item
 # input
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, redirect
+# delete
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 def index(request):
     return HttpResponse("Hello, world. You're at the pang index.")
@@ -56,12 +59,22 @@ def add_item(request, category_id):
 @require_POST
 def delete_item(request, item_id):
     # item_id로 Item을 찾고 삭제합니다.
+    '''
     Item.objects.get(id=item_id).delete()
     return redirect('show_items')  # 변경: 메인 페이지로 이동
+    '''
+    item = get_object_or_404(Item, id=item_id)
+    category = item.category
+    item.delete()
+    
+    return redirect('show_items')  # 변경: 메인 페이지로 이동
 
-
-@require_POST
-def delete_category(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    category.delete()
-    return redirect('show_items')
+# item이 모두 삭제된다면, Category도 삭제
+@receiver(post_delete, sender=Item)
+def delete_category_if_empty(sender, instance, **kwargs):
+    if not instance.category.items.exists():
+        category = instance.category
+        instance.category = None
+        instance.save()
+        category.refresh_from_db()  # primary key 값을 업데이트합니다.
+        category.delete()

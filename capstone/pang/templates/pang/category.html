@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <h1> Pang! </h1>
+
     {% for category in categories %}
         <!--<a href="pang/detail/"><h2>{{ category.name }}</h2></a>-->
         <h2 class="data-category-id">
-            <a href="{% url 'detail' category.id %}">{{ category.name }}</a>
+            <a href="{% url 'detail' category.id %}" class="category-link">{{ category.name }}</a>
         </h2>
     {% endfor %}
 
@@ -17,27 +19,23 @@
     </form>
 
     
+    <style>
+        .data-category-id{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 2px solid #ccc;
+            border-radius: 50px;   /* 이것이 div를 동그랗게 만듭니다 */
+            background-color: #f9f9f9;
+        }
 
-    <script>
-       
-       document.querySelectorAll('.category').forEach(function(element) {
-        element.addEventListener('dblclick', function(event) {
-            var category_id = event.target.getAttribute('data-category-id');
-            if (confirm('Are you sure you want to delete this category?')) {
-                fetch('/delete_category/' + category_id, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    }
-                }).then(function() {
-                    window.location.reload();
-                });
-            }
-        });
-    });
-
+        .category-link {
+            color: inherit;  /* 글자색을 상속 받습니다. */
+            text-decoration: none;  /* 밑줄을 제거합니다. */
+        }
         
-        </script>        
+    </style>
+      
 </body>
 </html>
 

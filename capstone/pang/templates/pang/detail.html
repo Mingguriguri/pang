@@ -4,11 +4,12 @@
     <h1>{{ categories.name }}</h1>
     <ul>
         {% for item in categories.items.all %}
-            <li class="item" data-item-id="{{ item.id}}">{{ item.contents }}</li>
-            <form action="{% url 'delete_item' item.id %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="submit" value="삭제">
-            </form>
+            <div class="item-container" data-item-id="{{ item.id }}">
+                <form action="{% url 'delete_item' item.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <div class="item">{{ item.contents }}</div>
+                </form>
+            </div>
         {% endfor %}
     </ul>
 
@@ -26,7 +27,8 @@
     <style>
         .button {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 20px;
+            margin: 20px;
             font-size: 15px;
             cursor: pointer;
             text-align: center;
@@ -45,32 +47,61 @@
             box-shadow: 0 5px #666;
             transform: translateY(4px);
         }
+
+        .item-container {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 2px solid #ccc;
+            border-radius: 50px;   /* 이것이 div를 동그랗게 만듭니다 */
+            background-color: #f9f9f9;
+        }
+
+        .item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .delete-button {
+            display: inline-block;
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            background-color: #ff4d4d;
+            color: #fff;
+            border-radius: 15px;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+
     </style>
     <script>
-
-        document.querySelectorAll('.delete-button').forEach(function(button) {
-            button.addEventListener('click', function(event) {
+        document.querySelectorAll('.item-container').forEach(function(container) {
+            container.addEventListener('dblclick', function(event) {
                 event.preventDefault(); // 기본 폼 제출 동작을 중지합니다.
 
-                var form = event.target.closest('form'); // 가장 가까운 부모 form을 찾습니다.
+                var form = container.querySelector('form'); // item-container 내의 폼을 찾습니다.
                 var url = form.action; // form의 action URL을 가져옵니다.
 
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    }
-                }).then(function(response) {
-                    if (response.ok) {
-                        window.location.reload(); // 페이지를 리로드합니다.
-                    } else {
-                        alert('Error: ' + response.status); // 오류가 발생한 경우 알림을 보냅니다.
-                    }
-                });
+                if (confirm('Are you sure you want to delete this item?')) {
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).then(function(response) {
+                        if (response.ok) {
+                            window.location.reload(); // 페이지를 리로드합니다.
+                        } else {
+                            alert('Error: ' + response.status); // 오류가 발생한 경우 알림을 보냅니다.
+                        }
+                    });
+                }
             });
         });
-
-        
     </script>
+
 </body>
 </html>

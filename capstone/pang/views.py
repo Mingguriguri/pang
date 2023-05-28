@@ -31,9 +31,16 @@ def detail(request, category_id):
 @require_POST
 def add_category(request):
     category_name = request.POST['category_name']
-    Category.objects.create(name=category_name)
-    return redirect('show_items')
+    item_name = request.POST.get('item_name')  # Add this line
+    
+    # 만약 같은 카테고리라면, 이미 있는 카테고리를 가져온다. 없다면 새로 만든다.
+    category, created = Category.objects.get_or_create(name=category_name)
 
+    if item_name:  # Add these lines
+        Item.objects.create(contents=item_name, category=category)
+
+    return redirect('show_items')
+    
 @require_POST
 def add_item(request, category_id):
     category = get_object_or_404(Category, id=category_id)
@@ -44,4 +51,11 @@ def add_item(request, category_id):
     if item_name:  # Check if item_name is not None
         Item.objects.create(contents=item_name, category=category)
 
-    return redirect('detail', category_id=category_id)
+    return redirect('show_items', category_id=category_id)
+
+
+@require_POST
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    category.delete()
+    return redirect('show_items')

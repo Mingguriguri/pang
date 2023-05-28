@@ -10,8 +10,46 @@
     <form method="POST" action="{% url 'add_category' %}">
         {% csrf_token %}
         <input type="text" name="category_name" placeholder="Enter new Category" required>
+        <input type="text" name="item_name" placeholder="Enter new item">  <!-- Item field is not required -->
         <input type="submit" value="Add">
     </form>
+
+    
+
+    <script>
+       
+        document.querySelectorAll('.category').forEach(function(element) {
+            // 문서 내의 모든 '.category' 클래스를 가진 요소를 선택하고, 각 요소에 대해 함수를 실행합니다.
+            // 이 함수는 각 요소(element)를 매개변수로 받습니다.
+        
+            element.addEventListener('dblclick', function(event) {
+                // 선택한 각 요소에 'dblclick' 이벤트 리스너를 추가합니다. 이 리스너는 요소가 더블 클릭될 때 호출되는 함수를 설정합니다.
+                // 이 함수는 이벤트 객체(event)를 매개변수로 받습니다.
+        
+                var category_id = event.target.getAttribute('data-category-id');
+                // 이벤트가 발생한 요소(event.target)의 'data-category-id' 속성 값을 가져와 category_id 변수에 저장합니다.
+        
+                // Show a confirmation message
+                if (confirm('Are you sure you want to delete this category?')) {
+                    // confirm 함수를 호출하여 확인 대화상자를 표시하고, 사용자가 'OK'를 누르면 true를 반환합니다.
+                    // 사용자가 'OK'를 눌렀을 때만 아래 코드를 실행합니다.
+        
+                    fetch('/delete_category/' + category_id, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    // fetch 함수를 호출하여 '/delete_category/' + category_id URL로 POST 요청을 보냅니다. 이 요청에는 CSRF 토큰이 헤더로 포함됩니다.
+        
+                    }).then(function() {
+                        window.location.reload();
+                        // 응답이 돌아오면 (즉, 카테고리가 삭제되면), 페이지를 새로고침합니다.
+                    });
+                }
+            });
+        });
+        
+        </script>        
 </body>
 </html>
 

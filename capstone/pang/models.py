@@ -1,11 +1,14 @@
 from django.db import models
 
-# Create your models here.
-
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
+class SmallCategory(models.Model):
+    parent_category = models.ForeignKey(Category, related_name='small', on_delete=models.CASCADE, null=True)
+    name = models.CharField(default="", max_length=200)
+
 class Item(models.Model):
-    category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE, null=True)
+    big_category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE, null=True)
+    small_category = models.ForeignKey(SmallCategory, related_name='items', on_delete=models.CASCADE, null=True)
     contents = models.CharField(default="", max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)  
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -11,31 +11,28 @@
           ☰
         </div>
         <!--Level 1-->
-        {% for category in categories %}
-            <div id="elem{{ category.id }}" class="level1 elem">
-            {{ category.name }}
+        {% for index, category in categories %}
+            <div id="elem{{ index }}" class="level1 elem{{index}}">
+                {{ category.name }}
+                <p>{{index}}</p>
             </div>
         {% endfor %}
 
         <!--Level 2-->
-        {% for category in categories %}
-            {% for small_category in category.small.all %}
-                <div id="elem{{ category.id }}child{{ small_category.id }}" class="elem elem{{small_category.id}}child level2">
-                {{ small_category.name }}
+        
+        {% for s_index, small_category in small_categories %}
+                <div id="elem{{ index }}child{{ s_index }}" class="elem elem{{index}}child level2">
+                    {{ small_category.name }}
+                    <p>{{s_index}}</p>
                 </div>
-            {% endfor %}
         {% endfor %}
-
-        <!-- Level 3 -->
-        {% for category in categories %}
-            {% for small_category in category.small.all %}
-                {% for item in small_category.items.all %}
-                    <div id="elem{{ category.id }}child{{ small_category.id }}subchild{{ item.id }}" class="elem elem{{ category.id }}child{{ small_category.id }}subchild{{ item.id }} level3">
-                    {{ item.contents }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
+        
+        <!-- Level 3 
+        {% for i_index, item in items %}
+            <div id="elem{{ index }}child{{ s_index }}subchild{{ item.id }}" class="elem elem{{ index }}child{{ s_index }}subchild{{ i_index }} level3">
+            {{ item.contents }}
+            </div>
+        {% endfor %}-->
 
       </div>
       <script src="../../static/pang/pang.js"></script>

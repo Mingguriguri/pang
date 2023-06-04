@@ -3,27 +3,15 @@ RADIUS_L2 = 130;
 alert("Hi")
 // handle click on center element
 $("#main").click(function() {
-    // collapse all elements attached to a level 1 element
-    for (var i = 0; i < $(".level1").length; i++) {
-        toggle("#elem" + i);
-        for (var small = 0; small < $(".child").length; small++){
-            // only if a child is visible, do a toggle = only collapse
-            if (!$("#elem" + i + "child" + small).hasClass("hiddenLevel2"))
-                toggle("#elem" + i + "child" + small);
-  
-            // also collapse all elements attached to a level 2 element
-            for (var sub = 0; sub < $(".subchild").length; sub++) {
-                // only if a subchild is visible, do a toggle = only collapse
-                if (!$("#elem" + i + "child" + small + "subchild" + sub).hasClass("hiddenLevel3"))
-                    toggle("#elem" + i + "child" + small + "subchild" + sub);
-            }
-        }
-    }
- 
-    // collapse or expand all elements attached to the main element
-    toggle("#main");
-  });
-  
+  // collapse all elements attached to a level 1 element
+  for (var i = 0; i < $(".level1").length; i++) {
+    // only if a child is visible, do a toggle = only collapse
+    if (!$("#elem" + i + "child0").hasClass("hiddenLevel2"))
+      toggle("elem" + i);
+  }
+  // collapse or expand all elements attached to the main element
+  toggle("#main");
+});
 initialize();
 
 function initialize() {
@@ -41,14 +29,11 @@ function initialize() {
           // if it does: first collapse all other elements
           for (var i = 0; i < $(".level1").length; i++) {
             // if a child is visible, then toggle -> collapse
-            for (var small = 0; small < $(".child").length; small++){
-                if (!$("#elem" + i + "child" + small).hasClass("hiddenLevel2")) { 
-                    // do nothing for this current element
-                    if ("elem" + i !== $(this).attr('id'))  
-                        toggle("elem" + i + "child" + small);
-                  }
+            if (!$("#elem" + i + "child0").hasClass("hiddenLevel2")) { 
+              // do nothing for this current element
+              if ("elem" + i !== $(this).attr('id'))  
+                toggle("elem" + i);
             }
-            
           }
           // then toggle this element
           toggle($(this).attr('id'));

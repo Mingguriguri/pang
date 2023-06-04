@@ -4,21 +4,21 @@
     <h1> Pang! </h1>
 
     {% for category in categories %}
-        <!--<a href="pang/detail/"><h2>{{ category.name }}</h2></a>-->
         <h2 class="data-category-id">
             <a href="{% url 'detail' category.id %}" class="category-link">{{ category.name }}</a>
+            {% for small_category in category.smallcategory_set.all %}
+                <div class="small-category">
+                    <a href="{% url 'small_category_detail' small_category.id %}" class="small-category-link">{{ small_category.name }}</a>
+                    {% for item in small_category.item_set.all %}
+                        <div class="item">
+                            <a href="{% url 'item_detail' item.id %}" class="item-link">{{ item.contents }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </h2>
     {% endfor %}
 
-    <h2>Add a new category: </h2>
-    <form method="POST" action="{% url 'add_category' %}">
-        {% csrf_token %}
-        <input type="text" name="category_name" placeholder="Enter new Category" required>
-        <input type="text" name="item_name" placeholder="Enter new item">  <!-- Item field is not required -->
-        <input type="submit" value="Add">
-    </form>
-
-    
     <style>
         .data-category-id{
             display: inline-block;
@@ -29,13 +29,27 @@
             background-color: #f9f9f9;
         }
 
-        .category-link {
+        .small-category {
+            margin: 10px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .item {
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            background-color: #e0e0e0;
+        }
+
+        .category-link, .small-category-link, .item-link {
             color: inherit;  /* 글자색을 상속 받습니다. */
             text-decoration: none;  /* 밑줄을 제거합니다. */
         }
-        
     </style>
       
 </body>
 </html>
-

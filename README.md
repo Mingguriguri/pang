@@ -9,11 +9,9 @@ This Page is JJan99's part
 ## Dataset
 - ALL BY MYSELF ~
 ```
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    내 앞 에 있 는 차 계속 따라가 .
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    차 따라붙 기 가능 하 냐 ?
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    앞차 와 제 동거리 를 유지 하 면서 따라가 줘 .
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    앞차 따라 안 붙 어 ?
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    앞 에 차 뒤 에 붙 어 줄래 ?
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    나 의 앞차 를 따라 가 주 렴 .
-__label__1.차량제어    __label__운전제어    __label__일자따라가기    앞 따라가 가 기 는 할 수 있 지 ?
+__label__1.할일    __label__주문    __label__음식    슈크림 빵 구매 하 기
+__label__2.아이디어    __label__의료    약 알러지 있 는 사람 기록 , 이쪽저쪽 병원 다 지니 지 않 고 병력 사항 을 모두 조회 가능 하 도록
+__label__1.할일    __label__학교    __label__프로그래밍    padding 어떻 ㄹ 때 하 는지 얼만큼 하 는지 꼭 물어보 기
+__label__4.기타    __label__가고싶은곳    __label__대구    오랜지 막창
+__label__1.할일    __label__학교    취업 상담 신청 하 지
 ```

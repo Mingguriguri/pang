@@ -1,0 +1,73 @@
+{% load static %}
+
+<html>
+<head>
+    <link href="../../static/pang/pang.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <div class="container">
+        <div id="main" class="level0 elem">
+          ☰
+        </div>
+
+        {% for index, category in categories %}
+            <div id="elem{{ index }}" class="level1 elem{{index}}">
+               {{index}}
+            </div>
+        {% endfor %}
+
+
+        
+        {% for index, category in categories %}
+            {% for s_index, small_category in small_categories %}
+                <div id="elem{{ index }}child{{ s_index }}" class="elem elem{{index}}child level2">
+                    {{ small_category.name }}
+                </div>
+            {% endfor %} 
+        {% endfor %}
+       
+        <!-- {% for index, category in categories %}
+        <div id="elem{{ index }}" class="level1 elem{{index}}">
+            {{ category.name }}
+            {% for s_index, small_category in small_categories %}
+                <div id="elem{{ index }}child{{ s_index }}" class="elem elem{{index}}child level2">
+                    {{ small_category.name }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div> -->
+
+        <!--Level 1
+        {% for index, category in categories %}
+            <div id="elem{{ index }}" class="level1 elem{{index}}">
+                {{ category.name }}
+                <p>{{index}}</p>
+            </div>
+        {% endfor %}-->
+
+        
+        <!--Level 2-->
+        
+        <!-- {% for s_index, small_category in small_categories %}
+                <div id="elem{{ index }}child{{ s_index }}" class="elem elem{{index}}child level2">
+                    {{ small_category.name }}
+                    <p>{{s_index}}</p>
+                </div>
+        {% endfor %}  -->
+         
+        <!-- Level 3 
+        {% for i_index, item in items %}
+            <div id="elem{{ index }}child{{ s_index }}subchild{{ item.id }}" class="elem elem{{ index }}child{{ s_index }}subchild{{ i_index }} level3">
+            {{ item.contents }}
+            </div>
+        {% endfor %}-->
+
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="../../static/pang/pang.js"></script>
+</body>
+</html>
+

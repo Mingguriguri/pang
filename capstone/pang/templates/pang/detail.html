@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>{{ categories.name }}</h1>
+    <h1>
+        <a href="{% url 'show_items' %}"  class="category-link">{{ categories.name }} </a>
+    </h1>
     <ul>
         {% for item in categories.items.all %}
             <div class="item-container" data-item-id="{{ item.id }}">
@@ -13,18 +15,16 @@
         {% endfor %}
     </ul>
 
-    <h3>Add a new item: </h3>
-    <form action="{% url 'add_item' categories.id %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="item_name" placeholder="Enter new item" required>
-        <input type="submit" value="Add Item">
-    </form>
     
     <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
     <a href="{% url 'show_items' %}" class="button">Back to Categories</a>
 
     <style>
+        .category-link {
+            color: inherit;  /* 글자색을 상속 받습니다. */
+            text-decoration: none;  /* 밑줄을 제거합니다. */
+        }
         .button {
             display: inline-block;
             padding: 20px;
@@ -77,7 +77,9 @@
         }
 
     </style>
+
     <script>
+        /*
         document.querySelectorAll('.item-container').forEach(function(container) {
             container.addEventListener('dblclick', function(event) {
                 event.preventDefault(); // 기본 폼 제출 동작을 중지합니다.
@@ -100,8 +102,7 @@
                     });
                 }
             });
-        });
+        });*/
     </script>
-
 </body>
 </html>

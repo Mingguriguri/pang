@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <h1> Pang! </h1>
+
     {% for category in categories %}
-        <!--<a href="pang/detail/"><h2>{{ category.name }}</h2></a>-->
         <h2 class="data-category-id">
-            <a href="{% url 'detail' category.id %}">{{ category.name }}</a>
+            <a href="{% url 'detail' category.id %}" class="category-link">{{ category.name }}</a>
+            {% for small_category in category.smallcategory_set.all %}
+                <div class="small-category">
+                    <a href="{% url 'small_category_detail' small_category.id %}" class="small-category-link">{{ small_category.name }}</a>
+                    {% for item in small_category.item_set.all %}
+                        <div class="item">
+                            <a href="{% url 'item_detail' item.id %}" class="item-link">{{ item.contents }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </h2>
     {% endfor %}
 
-    <h2>Add a new category: </h2>
-    <form method="POST" action="{% url 'add_category' %}">
-        {% csrf_token %}
-        <input type="text" name="category_name" placeholder="Enter new Category" required>
-        <input type="text" name="item_name" placeholder="Enter new item">  <!-- Item field is not required -->
-        <input type="submit" value="Add">
-    </form>
+    <style>
+        .data-category-id{
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 2px solid #ccc;
+            border-radius: 50px;   /* 이것이 div를 동그랗게 만듭니다 */
+            background-color: #f9f9f9;
+        }
 
-    
+        .small-category {
+            margin: 10px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            background-color: #f0f0f0;
+        }
 
-    <script>
-       
-       document.querySelectorAll('.category').forEach(function(element) {
-        element.addEventListener('dblclick', function(event) {
-            var category_id = event.target.getAttribute('data-category-id');
-            if (confirm('Are you sure you want to delete this category?')) {
-                fetch('/delete_category/' + category_id, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    }
-                }).then(function() {
-                    window.location.reload();
-                });
-            }
-        });
-    });
+        .item {
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            background-color: #e0e0e0;
+        }
 
-        
-        </script>        
+        .category-link, .small-category-link, .item-link {
+            color: inherit;  /* 글자색을 상속 받습니다. */
+            text-decoration: none;  /* 밑줄을 제거합니다. */
+        }
+    </style>
+      
 </body>
 </html>
-

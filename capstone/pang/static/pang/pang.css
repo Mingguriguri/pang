@@ -3,30 +3,38 @@ html, body {
     padding: 0;
     background-color: #98bff2;
     font-family: Garamond;
+
   }
 .container {
-text-align: center;
-line-height: 48px;
-position: absolute;
-z-index: 3;
-left: 50%;
-top: 50%;
-transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    line-height: 48px;
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
 }
 .elem {
+    display: block;
     text-align: center;
     line-height: 30px;
     font-size: 21px;
-    /*position: absolute; */
+    position: absolute;
+    /* border-radius: 4px; */
     z-index: 3;
-    padding: 10px 15px;
+    padding: 10px 10px;
     transition: background-color 0.2s;
   }
 .level0 {
-background-color: #6290c3;
-color: #2d3142;
-font-style: bold;
-transition: all 0.5s;
+    background-color: #6290c3;
+    color: #2d3142;
+    font-style: bold;
+    transition: all 0.5s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
 }
 .level0:hover {
 background-color: #4e739c;
@@ -37,11 +45,10 @@ cursor: pointer;
 .level1 {
     background-color: #b0d7ff;
     color: #2d3142;
+    font-weight: bold;
     transition: all 0.5s;
-    padding: 10px 18px;
+    padding: 10px 10px;
     transition: all 0.2s;
-    /*color: white;
-    background: rgba(0,0,0,0);*/
 }
 .level1:hover {
     transition: background-color 0.2s, border-radius 0.2s;

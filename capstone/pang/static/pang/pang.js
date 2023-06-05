@@ -12,43 +12,81 @@ $("#main").click(function() {
   // collapse or expand all elements attached to the main element
   toggle("#main");
 });
-initialize();
+
+$(window).on('load', function() {
+    initialize();
+  });
+// window.onload = function() { // 1차 수정
+//     initialize();
+// };
+
+// initialize(); // 원본
 
 function initialize() {
   // resize the container to fit the main elements width
   $(".container").css("width", $("#main").outerWidth() + "px");
   $(".container").css("height", $("#main").outerHeight() + "px");
-  
+  console.log("Level1의 개수: " + $(".level1").length) // 나중에 지우기 
   // loop through all level 1 elements  
   for (var i = 0; i < $(".level1").length; i++)
   {
-      // add click-event to each element
-      $("#elem" + i).click(function(e) {
+        // add click-event to each element
+        $("#elem" + i).click(function(e) {
         // check if the element has children
         if ( hasLevel2Children($(this).attr('id').match(/\d+/)[0]) === true ) {
-          // if it does: first collapse all other elements
-          for (var i = 0; i < $(".level1").length; i++) {
+            // if it does: first collapse all other elements
+            for (var i = 0; i < $(".level1").length; i++) {
             // if a child is visible, then toggle -> collapse
             if (!$("#elem" + i + "child0").hasClass("hiddenLevel2")) { 
-              // do nothing for this current element
-              if ("elem" + i !== $(this).attr('id'))  
-                toggle("elem" + i);
+                // do nothing for this current element
+                if ("elem" + i !== $(this).attr('id'))  
+                    toggle("elem" + i);
             }
-          }
-          // then toggle this element
-          toggle($(this).attr('id'));
+            }
+            // then toggle this element
+            toggle($(this).attr('id'));
         } else {
-          // if it does not have children
-          alert($(this).html());
+            // if it does not have children
+            alert($(this).html());
         }
-      });
-      // put level 1 elements into a circular position relative to the main element
-      centerx = $("#main").outerWidth() / 2;
-      centery = $("#main").outerHeight() / 2;
-      $("#elem" + i).css("left", centerx - RADIUS_L1 * Math.cos((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerWidth() / 2 + "px");
-      $("#elem" + i).css("top", centery - RADIUS_L1 * Math.sin((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerHeight() / 2 + "px");
+        });
+        // put level 1 elements into a circular position relative to the main element
+        // centerx = $("#main").offset().left / 2;
+        // centery = $("#main").offset().top  / 2;
+
+        // centerx = ($("#main").offset().left + $("#main").outerWidth()) / $(".level1").length;
+        // centery = ($("#main").offset().top + $("#main").outerHeight()) / $(".level1").length;
+        centerx = $("#main").outerWidth() / 2;
+        centery = $("#main").outerHeight() / 2;
+        console.log(centerx, centery)
+
       
-      angle = createLineFromTo("#main", "#elem" + i, "#line" + i);
+        console.log(i) // 콘솔창에 띄우기 (나중에 삭제해야 함)
+        var elem = $("#elem" + i);
+        var theta = ((i / $(".level1").length) * 2 * Math.PI * RADIUS_L1) / RADIUS_L1;
+        console.log("theta: " +theta) // 콘솔창에 띄우기 (나중에 삭제해야 함)
+        elem.css({
+            position: 'absolute',
+            // left: (elem.outerWidth() / 2) - RADIUS_L1 * Math.cos(i / $(".level1").length) + "px",
+            // top: (elem.outerHeight() / 2) - RADIUS_L1 * Math.sin(i / $(".level1").length) + "px"
+            left: centerx - RADIUS_L1 * Math.cos(theta)  + "px",
+            top: centery - RADIUS_L1 * Math.sin(theta) + "px"
+        });     
+        // 윗 부분 수정 전 모습:
+        // $("#elem" + i).css({
+        //     left: centerx - RADIUS_L1 * Math.cos((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerWidth() / 2 + "px",
+        //     top: centery - RADIUS_L1 * Math.sin((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerHeight() / 2 + "px"
+        // });
+        // 윗 부분 원본1:
+        // centerx = $("#main").outerWidth() / 2;
+        // centery = $("#main").outerHeight() / 2;
+        // $("#elem" + i).css("left", centerx - RADIUS_L1 * Math.cos((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerWidth() / 2 + "px");
+        // $("#elem" + i).css("top", centery - RADIUS_L1 * Math.sin((i / $(".level1").length) * 2 * Math.PI + Math.PI / 2) - $("#elem" + i).outerHeight() / 2 + "px");
+            
+        console.log(elem.outerWidth(), elem.outerHeight()) // 콘솔창에 띄우기 (나중에 삭제해야 함)
+        
+
+      angle = createLineFromTo("#main", "#elem" + i, "#line" + i, theta);
       if ( hasLevel2Children(i)) 
       {
         // prepare level 2 items, position them as if they were expanded
@@ -59,74 +97,78 @@ function initialize() {
       }
   }
 } 
-  function createLineFromTo(fromElem, toElem, lineId) {
-    fromTop = $(fromElem).offset().top + $(fromElem).outerHeight() / 2;
-    fromLeft = $(fromElem).offset().left + $(fromElem).outerWidth() / 2;
-    toTop = $(toElem).offset().top + $(toElem).outerHeight() / 2;
-    toLeft = $(toElem).offset().left + $(toElem).outerWidth() / 2;
-    theta = Math.PI - Math.atan2(toTop - fromTop, fromLeft - toLeft);
-    //alert(theta / Math.PI * 180);
-    
+  function createLineFromTo(fromElem, toElem, lineId, theta) {
+    fromTop = $(fromElem).offset().top + $(fromElem).outerHeight() /2 ;
+    fromLeft = $(fromElem).offset().left + $(fromElem).outerWidth() /2;
+    toTop = $(toElem).offset().top + $(toElem).outerHeight() /2  ;
+    toLeft = $(toElem).offset().left + $(toElem).outerWidth() /2;
+    theta = theta;
+    // theta = Math.PI - Math.atan2(toTop - fromTop, fromLeft - toLeft); // 원본 
+    // theta = ((toElem / $(".level1").length) * 2 * Math.PI * RADIUS_L1 ) / RADIUS_L1;  // 1차 수정
+    // console.log(fromTop, fromLeft)
+    // alert(theta / Math.PI * 180);
+    console.log("theta2: " + theta)
     if (!$(lineId).length) {
       $(fromElem).after("<div class='line lineFrom_" + $(fromElem).attr('id') + "' id='" + lineId.substring(1) + "'></div>");
     }
     $(lineId).css("width", Math.sqrt(Math.pow((fromTop - toTop), 2) + Math.pow((fromLeft - toLeft), 2)) + "px");
-     
     $(lineId).css("left", (fromLeft - $("#main").offset().left) + "px");
     $(lineId).css("top", (fromTop - $("#main").offset().top) + "px");
     $(lineId).css("transform", "rotate(" + theta + "rad)");
-    
     
     return theta;
   }
   
   function toggle(to) {
     if (to === "#main") {
-      // toggle first level
-      $(".level1").toggleClass("hiddenLevel1");
-      $(".lineFrom_main").toggleClass("hiddenLine");
+        // toggle first level
+        $(".level1").toggleClass("hiddenLevel1");
+        $(".lineFrom_main").toggleClass("hiddenLine");
     } else {
       // toggle second level
-      $(".lineFrom_" + to).toggleClass("hiddenLine");
+        $(".lineFrom_" + to).toggleClass("hiddenLine");
       
-      var i = $("#" + to).attr('id').match(/\d+/)[0];
-      if ($(".elem" + i + "child").hasClass("hiddenLevel2")) {
+        var i = $("#" + to).attr('id').match(/\d+/)[0];
+        // var i = to.match(/\d+/)[0]; 
+        
+        if ($(".elem" + i + "child").hasClass("hiddenLevel2")) {
         // now expand layer 1 element
         
-        $(".elem" + i + "child").removeClass("hiddenLevel2");
-        
-        fromTop = $("#main").offset().top + $("#main").outerHeight() / 2;
-        fromLeft = $("#main").offset().left + $("#main").outerWidth() / 2;
-        toTop = $("#elem" + i).offset().top + $("#elem" + i).outerHeight() / 2;
-        toLeft = $("#elem" + i).offset().left + $("#elem" + i).outerWidth() / 2;
-        angle = Math.PI - Math.atan2(toTop - fromTop, fromLeft - toLeft);
-        redrawLevel2(i, angle, false);
-        
-        
-      } else {
-        // now collapse layer 1 element
-        for (var j = 0; j < $(".elem" + i + "child").length; j++) {
-          xPos = parseFloat($("#elem" + i).css("left").slice(0, -2)) + $("#elem" + i).outerWidth() / 2; 
-          yPos = parseFloat($("#elem" + i).css("top").slice(0, -2)) + $("#elem" + i).outerHeight() / 2;
-          //set the right position
-          xPos -= $("#elem" + i + "child" + j).outerWidth() / 2;
-          yPos -= $("#elem" + i + "child" + j).outerHeight() / 2;
-        
-          $(".elem" + i + "child").css("left", xPos + "px");
-          $(".elem" + i + "child").css("top", yPos + "px");
+            $(".elem" + i + "child").removeClass("hiddenLevel2");
+            
+            fromTop = $("#main").offset().top + $("#main").outerHeight() / 2;
+            fromLeft = $("#main").offset().left + $("#main").outerWidth() / 2;
+            toTop = $("#elem" + i).offset().top + $("#elem" + i).outerHeight() / 2;
+            toLeft = $("#elem" + i).offset().left + $("#elem" + i).outerWidth() / 2;
+            angle = Math.PI - Math.atan2(toTop - fromTop, fromLeft - toLeft);
+            redrawLevel2(i, angle, false);
         }
-        $(".elem" + i + "child").addClass("hiddenLevel2"); 
-      } 
+        else {
+        // now collapse layer 1 element
+            for (var j = 0; j < $(".elem" + i + "child").length; j++) {
+                xPos = parseFloat($("#elem" + i).css("left").slice(0, -2)) + $("#elem" + i).outerWidth() / 2; 
+                yPos = parseFloat($("#elem" + i).css("top").slice(0, -2)) + $("#elem" + i).outerHeight() / 2;
+                //set the right position
+                xPos -= $("#elem" + i + "child" + j).outerWidth() / 2;
+                yPos -= $("#elem" + i + "child" + j).outerHeight() / 2;
+                
+                $(".elem" + i + "child").css("left", xPos + "px");
+                $(".elem" + i + "child").css("top", yPos + "px");
+            }
+            $(".elem" + i + "child").addClass("hiddenLevel2"); 
+        } 
     }
-  }
+}
   
   function hasLevel2Children(elemId) {
+    
     if ($(".level2").length === 0) return false;
     for (var i = 0; i < $(".level2").length; i++) {
       if ($(".level2").eq(i).hasClass("elem" + elemId + "child"))
         return true;
     }
     return false;
+    // return $(".elem" + elemId + "child").length > 0;
   }
 function redrawLevel2(i, angle, preparation) {
     var j = 0;
@@ -164,3 +206,4 @@ function rad(degrees) {
 function deg(radians) {
   return radians * 180 / Math.PI;
 };
+

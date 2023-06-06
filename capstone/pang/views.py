@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, SmallCategory, Item
 
 def index(request):
@@ -39,3 +39,11 @@ def detail(request, category_id):
     
     return render(request, 'pang/detail.html', context)
 
+def delete_elem(request):
+    if request.method == 'POST':
+        elem_id = request.POST.get('elem_id')
+        elem = get_object_or_404(Item, id=elem_id)
+        elem.delete()
+        return redirect('pang:index')
+    else:
+        return HttpResponse(status=405)

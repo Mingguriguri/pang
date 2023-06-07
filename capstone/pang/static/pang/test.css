@@ -59,7 +59,7 @@ html, body {
   border: #adacb5 1px solid;
   height: 0px;
   transition: all 0.5s;
-  z-index: 1;
+  z-index: 0;
 }
 .hiddenLevel1 {
   z-index: 1;
@@ -100,12 +100,12 @@ html, body {
   cursor: default;
 }
 
-/* 
+
 .level3 {
   z-index: 1;
   white-space: nowrap;
   color: #2d3142;
-  padding: 5px 5px;
+  padding: 4px 5px;
   background-color: #f3f9ff;
   transition: all 0.5s;
 }
@@ -121,4 +121,12 @@ html, body {
 }
 .hiddenLevel3:hover {
   cursor: default;
-} */
+}
+
+#zoom {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0px 0px;
+  transform: scale(1) translate(0px, 0px);
+  cursor: grab;
+}

@@ -1,5 +1,7 @@
-RADIUS_L1 = 200;
+RADIUS_L1 = 150;
 RADIUS_L2 = 150;
+RADIUS_L3 = 200;
+
   
 // handle click on center element
 $("#main").click(function() {
@@ -277,8 +279,8 @@ function redrawLevel3(i, j, angle, preparation) {
     yPos = parseFloat($("#elem" + i + "child" + j).css("top").slice(0, -2)) + $("#elem" + i + "child" + j).outerHeight() / 2;
     amount = $(".elem" + i + "child" + j + "subchild").length;
     distance = 46 - amount * 3;
-    xPos += Math.cos(rad(angle) + rad((amount - 1) * -distance / 2 + k * distance)) * RADIUS_L2;
-    yPos += Math.sin(rad(angle) + rad((amount - 1) * -distance / 2 + k * distance)) * RADIUS_L2;
+    xPos += Math.cos(rad(angle) + rad((amount - 1) * -distance / 2 + k * distance)) * RADIUS_L3;
+    yPos += Math.sin(rad(angle) + rad((amount - 1) * -distance / 2 + k * distance)) * RADIUS_L3;
     
     //set the right position
     xPos -= $("#elem" + i + "child" + j + "subchild" + k).outerWidth() / 2;

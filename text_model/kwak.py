@@ -2,6 +2,10 @@ from PyKomoran import *
 import fasttext
 from konlpy.tag import Okt
 
+#pip install PyKomoran
+#pip install fasttext
+#pip install konlpy
+
 def a(userMemo):
 
     input_morph = w2v(userMemo)

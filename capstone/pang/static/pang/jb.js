@@ -107,16 +107,6 @@ function initialize() {
   }
 } 
 
-function hasLevel3Children(elemId, childId) {
-  if ($(".level3").length === 0) return false;
-  for (var i = 0; i < $(".level3").length; i++) {
-    if ($(".level3").eq(i).hasClass("elem" + elemId + "child" + childId + "subchild"))
-      return true;
-  }
-  return false;
-}
-
-
 function createLineFromTo(fromElem, toElem, lineId) {
     console.log("fromElem: ", fromElem, "toElem: ", toElem, "lineId: ", lineId)
   fromTop = $(fromElem).offset().top + $(fromElem).outerHeight() / 2;
@@ -268,6 +258,15 @@ function redrawLevel2(i, angle, preparation) {
 }
 
 
+function hasLevel3Children(elemId, childId) {
+    if ($(".level3").length === 0) return false;
+    for (var i = 0; i < $(".level3").length; i++) {
+      if ($(".level3").eq(i).hasClass("elem" + elemId + "child" + childId + "subchild"))
+        return true;
+    }
+    return false;
+  }
+  
 function redrawLevel3(i, j, angle, preparation) {
   var k = 0;
   angle = deg(angle);

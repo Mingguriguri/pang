@@ -1,13 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
-  }
   
   a{
     text-decoration: none;
   }
   
-
   .search-container {
     float: right;
     height: 4em;
@@ -17,8 +12,8 @@
   .search-container:hover, .search-container:focus, .search-container:focus-within {
     width: 25em;
     margin-right: 20em;
-    border-radius: 5px 2em 2em 5px;
-    background-color: #74c7e7;
+    border-radius: 20px 2em 2em 20px;
+    background-color: #b0d7ff;
     outline: none;
   }
   .search-container:hover input, .search-container:focus input, .search-container:focus-within input {
@@ -107,7 +102,7 @@ input:focus {
     display: block;
     max-width: 200px;
     margin-bottom: 0 auto;
-    background: #0b1f7a;
+    background: #6290c3;
     color: #fff;
     font-size: 2.5;
     padding-top: 75px;
@@ -193,8 +188,8 @@ input:focus {
 .toggle ~ .tab {
     position: absolute;
     font-size:100%;
-    background: #74c7e7;
-    color: #fff;
+    background: #b0d7ff;
+    color: #6290c3;
     width: 80px;
     height: 75px;
     left: 0px;

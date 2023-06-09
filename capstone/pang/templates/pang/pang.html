@@ -2,28 +2,62 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="#">
+
     <link href="{% static 'pang/test.css' %}" rel="stylesheet" >
+    <link href="{% static 'pang/navi.css' %}" rel="stylesheet" >
+    <link href="{% static 'pang/search.css' %}" rel="stylesheet" >
+    <link href="{% static 'pang/title.css' %}" rel="stylesheet" >
+
+  
+
     <style>
-        /* @font-face {
+       /* font-face {
+            font-family: 'GangwonEdu_OTFBoldA' !important;
+            src: '/.fonts/강원교육모두 Bold.otf' format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        } */
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+        @font-face {
             font-family: 'GangwonEdu_OTFBoldA';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
             font-weight: normal;
             font-style: normal;
-        } */
-        font-face {
-        font-family: 'GangwonEdu_OTFBoldA';
-        src: '/.fonts/강원교육모두 Bold.otf' format('opentype');
-        font-weight: 400;
-        font-style: normal;
         }
     </style>
     <!-- <link href="../../static/pang/test.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <p>evel 3까지 있는 것-</p>
+    
+    <div class="title">
+        <h1>
+            <span>P</span>
+            <span>a</span>
+            <span>n</span>
+            <span>g</span>
+        </h1>
+    </div>
+
+    <div class='search_con' id="test">
+        <link rel="stylesheet" href="./search.css">
+        <form action="./sear.js" method="get" class="input_con">
+            <input type="text" placeholder='Write down your memo...' spellCheck="False" id="queryFind"/>
+                <span id="clearBtn"><i class="bi bi-x-lg"></i></span>
+                <span class='h-line'></span>
+                <a href="https://t.me/rawnge" target="_blank">  
+    
+                <span><i class="bi bi-pencil-square"></i></span>
+                </a>
+        </form>
+    </div>
+
     <div class="zoom_outer">
         <div id="zoom">
 
@@ -56,7 +90,37 @@
             </div> 
         </div>
     </div>
+
+    <div class='menu'>
+        <input class='toggle' id='menu' type='checkbox'>
+        <label class='style' for='menu'>
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </label>
+
+        <div class="tab">
+          <i class="bi bi-search" style="position: absolute;"></i>
+          <div class="search-container">
+            <input placeholder="search" type="text"></input>
+          </div>
+        </div>
+
+        <div class="tab">
+          <i class="bi bi-house"></i>
+        </div>
+
+        <div class="tab">
+          <i class="bi bi-gear"></i>
+        </div>
+        
+        <i class="bi bi-house" ></i>
+        <i class="bi bi-gear"></i>
+
+    </div>
+
+
     <script src="{% static 'pang/pang.js' %}"></script>
+    <script src="{% static 'pang/sear.js' %}"></script>
+
 </body>
 </html>
 

@@ -3,7 +3,6 @@
   margin: 0px; padding: 0px;
   border: 0px; outline: 0px;
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-decoration: none; list-style: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,17 +10,17 @@
 
 
 .search_con {
-  visibility: visible;
-  position: fixed;
-  top: 0;
-
-  margin: 0 auto;
-  /*padding: 5rem 0;*/
-     width: 100%;
-     height: 10%;
-	 display: flex;
-	 justify-content: flex-start;
-	 align-items: center;
+	z-index: 999;
+	visibility: visible;
+	position: fixed;
+	top: 0;
+	margin: 0 auto;
+	/*padding: 5rem 0;*/
+	width: 100%;
+	height: 10%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 }
   
 
@@ -31,7 +30,6 @@
 	 width: 550px;
 	 height: 2.5rem;
 	 background-color: white;
-	 border: 1px solid #00b7ff;
 	 align-items: center;
 	 justify-content: space-between;
 	 overflow: hidden;
@@ -40,7 +38,7 @@
 	 outline: 3px solid transparent;
 }
  .search_con .input_con:focus-within {
-	 outline: 3px solid #c8d5f3;
+	 outline: 3px solid #4e739c;
 }
  .search_con .input_con input {
 	 padding: 0 0.5rem 0 1rem;
@@ -55,14 +53,13 @@
 }
  .search_con .input_con span .bi {
 	 padding: 0 0.5rem;
-	 color: #00b7ff;
+	 color: #4e739c;
 	 font-size: 15px;
 	 line-height: 2.5rem;
 	 cursor: pointer;
-	 color: rgba(0, 0, 0, 0.733);
 }
  .search_con .input_con span .bi:hover {
-	 color: #00b7ff;
+	 color: #4e739c;
 }
  .search_con .input_con span .bi-search {
 	 padding-right: 1rem;
@@ -70,5 +67,5 @@
  .search_con .input_con .h-line {
 	 height: 50%;
 	 width: 1px;
-	 background-color: #00b7ff;
+	 background-color: #4e739c;
 }

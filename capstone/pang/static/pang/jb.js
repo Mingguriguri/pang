@@ -107,16 +107,6 @@ function initialize() {
   }
 } 
 
-function hasLevel3Children(elemId, childId) {
-  if ($(".level3").length === 0) return false;
-  for (var i = 0; i < $(".level3").length; i++) {
-    if ($(".level3").eq(i).hasClass("elem" + elemId + "child" + childId + "subchild"))
-      return true;
-  }
-  return false;
-}
-
-
 function createLineFromTo(fromElem, toElem, lineId) {
     console.log("fromElem: ", fromElem, "toElem: ", toElem, "lineId: ", lineId)
   fromTop = $(fromElem).offset().top + $(fromElem).outerHeight() / 2;
@@ -268,6 +258,15 @@ function redrawLevel2(i, angle, preparation) {
 }
 
 
+function hasLevel3Children(elemId, childId) {
+    if ($(".level3").length === 0) return false;
+    for (var i = 0; i < $(".level3").length; i++) {
+      if ($(".level3").eq(i).hasClass("elem" + elemId + "child" + childId + "subchild"))
+        return true;
+    }
+    return false;
+  }
+  
 function redrawLevel3(i, j, angle, preparation) {
   var k = 0;
   angle = deg(angle);
@@ -312,7 +311,12 @@ function deg(radians) {
 
 
 
-var scale = 1, panning = false, pointX = 0, pointY = 0, start = { x: 0, y: 0 }, zoom = document.getElementById("zoom");
+var scale = 1,
+panning = false,
+pointX = 0,
+pointY = 0,
+start = { x: 0, y: 0 },
+zoom = document.getElementById("zoom");
 var state = "0";
 var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -355,43 +359,6 @@ function setTransform() {
       if (!$("#elem" + i + "child0").hasClass("hiddenLevel2")) { 
         toggle("elem" + i);
       }
-    }
-
-    for (var j = 0; j < $(".level2").length; j++) {
-        var elem = document.querySelector("#elem" + i + "child" + j);
-        var elem_dollar = $("#elem" + i) + "child" + j ;
-        var elemWidth = elem_dollar.outerWidth();
-        var elemHeight = elem_dollar.outerHeight();
-        var elemX = elem_dollar.offset().left + elemWidth / 2;
-        var elemY = elem_dollar.offset().top + elemHeight / 2;
-        
-        var distanceX = Math.abs(centerX - elemX);
-        var distanceY = Math.abs(centerY - elemY);
-        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        let wi = elem.getBoundingClientRect().height;
-        if (wi > 70 && distance < 200){
-        //state = 1;
-        //toggle("elem" + 2);
-        if (!$("#elem" + i + "child" + j + "subchild0").hasClass("hiddenLevel3")) { 
-            // do nothing for this current element
-            if ("elem" + i + "child" + j !== $(this).attr('id'))  
-            toggle("elem" + i + "child" + j );
-        }
-        toggle("elem" + i + "child" + j );
-        }
-        else if (wi < 70){
-        //state = 0;
-        //toggle("elem" + 2);
-        if (!$("#elem" + i + "child" + j + "subchild0").hasClass("hiddenLevel3")) { 
-            toggle("elem" + i + "child" + j );
-        }
-        }
-        else if (distance > 200){
-        if (!$("#elem" + i + "child" + j +"subchid0").hasClass("hiddenLevel3")) { 
-            toggle("elem" + i + "child" + j );
-        }
-        }
     }
   }
 }

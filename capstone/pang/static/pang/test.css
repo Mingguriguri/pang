@@ -1,10 +1,13 @@
+*{
+  font-family: 'GangwonEdu_OTFBoldA', 'sans-serif' !important;
+}
 html, body {
   margin: 0;
   padding: 0;
   background-color: #d6e5f8;
-  font-family: Garamond;
 }
 .container {
+
   text-align: center;
   line-height: 48px;
   position: absolute;
@@ -24,6 +27,7 @@ html, body {
   padding: 10px 15px;
   transition: background-color 0.2s;
   white-space: nowrap;
+  
 }
 .level0 {
   background-color: #6290c3;
@@ -44,6 +48,7 @@ html, body {
   padding: 10px 18px;
   transition: all 0.2s;
   white-space: nowrap;
+  
   /*color: white;
   background: rgba(0,0,0,0);*/
 }

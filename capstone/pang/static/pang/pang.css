@@ -4,6 +4,7 @@ html, body {
   background-color: #d6e5f8;
   font-family: Garamond;
 }
+
 .container {
   text-align: center;
   line-height: 48px;
@@ -104,7 +105,7 @@ html, body {
 .level3 {
   z-index: 1;
   white-space: nowrap;
-  color: #2d3142;
+  color: #2d3142 !important;
   padding: 5px 5px;
   background-color: #f3f9ff;
   transition: all 0.5s;

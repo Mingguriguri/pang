@@ -3,12 +3,19 @@
     text-decoration: none;
   }
   
+  
   .search-container {
     float: right;
     height: 4em;
     width: 4em;
     border-radius: 2em;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
   }
+
   .search-container:hover, .search-container:focus, .search-container:focus-within {
     width: 25em;
     margin-right: 20em;
@@ -18,13 +25,13 @@
   }
   .search-container:hover input, .search-container:focus input, .search-container:focus-within input {
     display: inline-block;
-    margin-right: 20em;
+    margin-right: 50em;
     left: 5em;
-    width: 19em;
+    width: 15em;
     padding: 10px;
     box-shadow: 0 0 5px #6A5D4F;
   }
-  
+
 
 input {
   -moz-appearance: none;
@@ -52,7 +59,8 @@ input:focus {
   outline: none;
   box-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25), 0 1px 5px rgba(0, 0, 0, 0.15);
 }
-  
+
+
 .button {
   display: flex;
   align-items: center;
@@ -75,8 +83,6 @@ input:focus {
     font-size: 85%; }
 
 
-
-
 .menu {
   position: absolute;
   margin-top: 0px;
@@ -84,8 +90,8 @@ input:focus {
   left: 50%;
   width: 1%;
   transform: translate(-50%, 55%);
-}
 
+}
 
 .toggle {
   display: none;
@@ -126,6 +132,7 @@ input:focus {
 
 .bi bi-house{
   vertical-align: baseline;
+  
 }
 
 .bi bi-gear{
@@ -134,8 +141,13 @@ input:focus {
 }
 
 .bi bi-searchdyth {
-  left:50%;
-  top: 50px;
+  /* left:50%;
+  top: 50px; */
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
 }
 
 .toggle + .style:hover{
@@ -201,6 +213,7 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: hand;
 }
 
 .toggle:checked ~ .tab {
@@ -218,6 +231,7 @@ input:focus {
   top: -80px;
   left: 0px;
   transition-delay: 0.125s;
+  
 }
 
 .menu > .toggle:checked ~ .tab:nth-of-type(3) {
@@ -226,7 +240,7 @@ input:focus {
   transition-delay: 0.25s;
 }
  
-
+/* 
 
 .kontainer {
   width: 80px;
@@ -238,7 +252,7 @@ input:focus {
 
 .kontainer i {
   font-size:100%;
-}
+} */
 
 
   /*

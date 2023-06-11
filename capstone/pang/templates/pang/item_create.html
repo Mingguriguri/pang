@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+<head>
+    <style>
+ 
+    </style>
+</head>
+<body>
+ 
+    <div class="post-create">
+        <div>
+            Create Post
+        </div>
+        <div class="form">
+            <form action="{% url 'pang:item_create' %}"
+                    method = "post"
+                    enctype="multipart/form-data">
+                { % csrf_token % }
+                {{ form.as_p}}
+                <input type="submit" value="Create">
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

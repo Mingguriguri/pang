@@ -9,8 +9,7 @@
     padding: 2em; /* 여유를 두기 위한 패딩 */
 }
   h1 {
-
-    height: 100px;    
+    height: 50px;    
     letter-spacing: -2px; /* 글자 간 간격 줄이기 */
 }
   
